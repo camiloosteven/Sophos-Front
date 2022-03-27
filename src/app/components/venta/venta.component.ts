@@ -15,7 +15,7 @@ export class VentaComponent implements OnInit {
   listaProductos: any[] = [];
   listaClientes: any[] = [];
   idPventa_: number = 0;
-  idPproducto: number = 0;
+  valorTotal: number = 0;
   listaProductosNombre: any[] = [];
   typeEdit: boolean = false;
   formVenta: FormGroup;
@@ -64,14 +64,21 @@ export class VentaComponent implements OnInit {
       this.listaVentas = data1;
       this.productoService.getListProducts().subscribe(data2 => {
         this.listaProductos = data2;
-        console.log(this.listaVentas);
-        console.log(this.listaProductos);
         this.listaVentas.forEach((element1, index2) => {
           this.listaProductos.forEach((element2, index) => {
-            console.log(element1, element2);
             if (element1.idProducto == element2.idProducto) {
               console.log("Entro al if", element2.nombre);
               this.listaVentas[index2].idProducto = element2.nombre
+            } else {
+              console.log("No entro al if");
+            }
+          });
+        });
+        this.listaVentas.forEach((element1, index2) => {
+          this.listaClientes.forEach((element2, index) => {
+            if (element1.idCliente == element2.idCliente) {
+              console.log("Entro al if", element2.nombre);
+              this.listaVentas[index2].idCliente = element2.nombres
             } else {
               console.log("No entro al if");
             }
@@ -83,12 +90,22 @@ export class VentaComponent implements OnInit {
   }
 
   agregarProducto() {
+    this.productoService.getListProducts().subscribe(data2 => {
+    this.listaProductos = data2;})
+    this.listaProductos.forEach(element => {
+      if (this.formVenta.get('idProducto')?.value == element.idProducto) {
+        console.log("Entra al ifff");
+        this.valorTotal =  this.formVenta.get('cantidad')?.value * element.precioUnitario
+        console.log(this.valorTotal);
+      }
+    });
     const venta: any = {
       idCliente: this.formVenta.get('idCliente')?.value,
       IdProducto: this.formVenta.get('idProducto')?.value,
       cantidad: this.formVenta.get('cantidad')?.value,
-      total: this.formVenta.get('cantidad')?.value * 2
+      total: this.valorTotal
     }
+    
     if (this.id == undefined) {
       console.log(venta);
       this.ventasService.agregarVenta(venta).subscribe(data => {
@@ -126,7 +143,5 @@ export class VentaComponent implements OnInit {
       cantidad: venta.cantidad,
       total: this.formVenta.get('cantidad')?.value * 2
     })
-
   }
-
 }
