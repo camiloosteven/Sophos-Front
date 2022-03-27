@@ -1,0 +1,12 @@
+.title{
+    text-align: center;
+}
+.fontIcons{
+    cursor: pointer;
+}
+.correct{
+    color: green;
+}
+.incorrect{
+    color: red;
+}
