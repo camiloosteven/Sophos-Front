@@ -9,7 +9,7 @@ import { ProductoService } from 'src/app/services/producto.service';
   styleUrls: ['./producto.component.css']
 })
 export class ProductoComponent implements OnInit {
-
+  TableHead: any[] = ["Producto", "Cantidad",  "Precio c/u"]
   listProducts: any[] = [];
   typeEdit: boolean = false;
   form: FormGroup;
@@ -17,7 +17,8 @@ export class ProductoComponent implements OnInit {
   constructor(private formB: FormBuilder,private toastr: ToastrService, private productService: ProductoService) {
     this.form = this.formB.group({
       nombre: ['',Validators.required],
-      precioUnitario: ['',Validators.required]
+      precioUnitario: ['',Validators.required],
+      cantidad: ['',Validators.required]
     })
    }
 
@@ -34,6 +35,7 @@ export class ProductoComponent implements OnInit {
     const producto: any ={
       nombre: this.form.get('nombre')?.value,
       precioUnitario: this.form.get('precioUnitario')?.value,
+      cantidad: this.form.get('cantidad')?.value,
     }
     if (this.id == undefined) {
         this.productService.addProduct(producto).subscribe(data =>{
@@ -67,7 +69,8 @@ export class ProductoComponent implements OnInit {
     this.id = producto.idProducto;
     this.form.patchValue({
       nombre: producto.nombre,
-      precioUnitario: producto.precioUnitario
+      precioUnitario: producto.precioUnitario,
+      cantidad: producto.cantidad,
     })
 
   }

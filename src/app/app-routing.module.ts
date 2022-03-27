@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule} from '@angular/router';
 import { VentaComponent } from './components/venta/venta.component';
-import { ProductoComponent } from './producto/producto.component';
+import { ProductoComponent } from './components/producto/producto.component';
 
 const routes: Routes =[
   {path: '', redirectTo: '/home', pathMatch:'full'},

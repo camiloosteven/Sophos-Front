@@ -3,7 +3,7 @@
         <div class="col-lg-8 offset-lg-2">
             <div class="card">
                 <div class="card-body">
-                    <h3>VENTAS</h3>
+                    <h3 class="title">PRODUCTOS</h3>
                 </div>
             </div>
         </div>
@@ -12,13 +12,21 @@
         <div class="col-lg-6">
             <div class="card">
                 <div class="card-body">
-                    <h3>{{ !typeEdit ? 'Agregar Producto' : 'Editar Producto' }}</h3>
+                    <h3 class="title">{{ !typeEdit ? 'Agregar Producto' : 'Editar Producto' }}</h3>
                     <form [formGroup]="form" (ngSubmit)="agregarProducto()">
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Nombre</label>
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fa-solid fa-user" [class.correct]="this.form.get('nombre')?.valid" [class.incorrect]="this.form.get('nombre')?.invalid && this.form.get('nombre')?.touched"></i></span>
                                 <input formControlName="nombre" type="text" class="form-control" placeholder="Nombre" aria-label="Nombre"
+                                    aria-describedby="basic-addon1">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1">Cantidad</label>
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa-solid fa-calculator" [class.correct]="this.form.get('cantidad')?.valid" [class.incorrect]="this.form.get('cantidad')?.invalid && this.form.get('cantidad')?.touched"></i></span>
+                                <input formControlName="cantidad" type="text" class="form-control" placeholder="cantidad" aria-label="cantidad"
                                     aria-describedby="basic-addon1">
                             </div>
                         </div>
@@ -67,11 +75,15 @@
         <div class="col-lg-6">
             <div class="card">
                 <div class="card-body">
-                    <h3>Listar ventas</h3>
+                    <h3 class="title">Productos Disponibles</h3>
                     <table class="table">
                         <tbody>
+                            <tr>
+                                <th *ngFor="let columna of TableHead" scope="col">{{columna}}</th>
+                              </tr>
                             <tr *ngFor="let elem of listProducts; let i = index">
                                 <td>{{elem.nombre}}</td>
+                                <td>{{elem.cantidad}}</td>
                                 <td>{{elem.precioUnitario}}</td>
                                 <td><i class="fa-solid fa-pen-to-square text-info fontIcons" (click)="editarProducto(elem);selectEdit()"></i></td>
                                 <td><i class="fa-solid fa-trash text-danger fontIcons" (click)="eliminarPorducto(elem.idProducto)"></i></td>
