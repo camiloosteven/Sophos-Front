@@ -1,0 +1,85 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+            <div class="card">
+                <div class="card-body">
+                    <h3>VENTAS</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <h3>{{ !typeEdit ? 'Agregar Producto' : 'Editar Producto' }}</h3>
+                    <form [formGroup]="form" (ngSubmit)="agregarProducto()">
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1">Nombre</label>
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa-solid fa-user" [class.correct]="this.form.get('nombre')?.valid" [class.incorrect]="this.form.get('nombre')?.invalid && this.form.get('nombre')?.touched"></i></span>
+                                <input formControlName="nombre" type="text" class="form-control" placeholder="Nombre" aria-label="Nombre"
+                                    aria-describedby="basic-addon1">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1">Precio Unitario</label>
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa-solid fa-calculator" [class.correct]="this.form.get('precioUnitario')?.valid" [class.incorrect]="this.form.get('precioUnitario')?.invalid && this.form.get('precioUnitario')?.touched"></i></span>
+                                <input formControlName="precioUnitario" type="text" class="form-control" placeholder="Precio" aria-label="Precio" maxlength="5"
+                                    aria-describedby="basic-addon1">
+                            </div>
+                        </div>
+                        <!-- <div class="form-group">
+                            <label for="exampleFormControlSelect1">Precio Unitario</label>
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa-solid fa-apple-whole"></i></span>
+                                <select class="form-control" id="exampleFormControlSelect1">
+                                    <option formControlName="" *ngFor="let product of listProducts">{{product.nombre}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1">Cantidad</label>
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa-solid fa-calculator"></i></span>
+                                <input type="number" class="form-control" placeholder="Cantidad" aria-label="Cantidad"
+                                    aria-describedby="basic-addon1">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1">Total</label>
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa-solid fa-wallet"></i></span>
+                                <input type="number" class="form-control" aria-label="Total"
+                                    aria-describedby="basic-addon1">
+                            </div>
+                        </div>
+                        -->
+                        <div class="d-grid gap-2">
+                            <button [disabled]="this.form.invalid" type="submit" class="btn btn-success btn-lg btn-block">ACEPTAR</button>
+                        </div> 
+                    
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <h3>Listar ventas</h3>
+                    <table class="table">
+                        <tbody>
+                            <tr *ngFor="let elem of listProducts; let i = index">
+                                <td>{{elem.nombre}}</td>
+                                <td>{{elem.precioUnitario}}</td>
+                                <td><i class="fa-solid fa-pen-to-square text-info fontIcons" (click)="editarProducto(elem);selectEdit()"></i></td>
+                                <td><i class="fa-solid fa-trash text-danger fontIcons" (click)="eliminarPorducto(elem.idProducto)"></i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
