@@ -1,4 +1,7 @@
 <div class="container mt-5">
+    <div class="volver">
+        <a routerLink="/home" class="dashboard-nav-item"><i class="fa-solid fa-circle-arrow-left"></i> Volver </a>
+        </div>
     <div class="row">
         <div class="col-lg-8 offset-lg-2">
             <div class="card">
@@ -60,7 +63,7 @@
                                 <span class="input-group-text"><i class="fa-solid fa-user"
                                         [class.correct]="this.formCliente.get('correo')?.valid"
                                         [class.incorrect]="this.formCliente.get('correo')?.invalid && this.formCliente.get('correo')?.touched"></i></span>
-                                <input formControlName="correo" type="email" class="form-control" placeholder="Correo"
+                                <input formControlName="correo" type="text" class="form-control" placeholder="Correo"
                                     aria-label="Correo" aria-describedby="basic-addon1">
                             </div>
                         </div>
