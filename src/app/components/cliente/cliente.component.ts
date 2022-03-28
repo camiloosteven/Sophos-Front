@@ -42,6 +42,8 @@ export class ClienteComponent implements OnInit {
       edad: this.formCliente.get('edad')?.value,
       corrreo: this.formCliente.get('correo')?.value,
     }
+    console.log(cliente);
+    
     if (this.id == undefined) {
         this.clienteService.agregarCliente(cliente).subscribe(data =>{
         this.toastr.success('El cliente se ha creado correctamente', 'Cliente ingresado');

@@ -83,42 +83,61 @@ export class VentaComponent implements OnInit {
         if (this.formVenta.get('cantidad')?.value > element.cantidad) {
           this.stock = false
           this.toastr.error('No hay suficientes productos', 'Stock Insuficionte');
-        } else {
-          this.stock = true
-          const producto: any ={
-            idProducto: element.idProducto,
-            nombre: element.nombre,
-            precioUnitario: element.precioUnitario,
-            cantidad: element.cantidad-this.formVenta.get('cantidad')?.value
-          }
-          console.log(producto);
-          this.productoService.editProduct(element.idProducto,producto).subscribe(data =>{})
-          this.obtenerVentas();
-          this.formVenta.reset()
         }
       }
       
-    });
+    })
     const venta: any = {
       idCliente: this.formVenta.get('idCliente')?.value,
       IdProducto: this.formVenta.get('idProducto')?.value,
       cantidad: this.formVenta.get('cantidad')?.value,
       total: this.valorTotal
     }
-
+    console.log(venta);
+    
     if (this.id == undefined) {
       if (this.stock) {
         this.ventasService.agregarVenta(venta).subscribe(data => {
           this.toastr.success('La venta se ha registrado correctamente', 'Venta registrada');
-        //   producto.idProducto = this.id
-        // this.productService.editProduct(this.id,producto).subscribe(data =>{
-        // this.form.reset()
-        // this.id = undefined
-        // this.toastr.success('Tu producto se ha actualizado correctamente', 'Producto Actualizado');
+          this.listaProductos.forEach(element => {
+            if (this.formVenta.get('idProducto')?.value == element.idProducto) {
+              const producto: any ={
+                        idProducto: element.idProducto,
+                        nombre: element.nombre,
+                        precioUnitario: element.precioUnitario,
+                        cantidad: element.cantidad-this.formVenta.get('cantidad')?.value
+                      }
+                      console.log(producto);
+                      this.productoService.editProduct(element.idProducto,producto).subscribe(data =>{})
+                      this.obtenerVentas();
+                      this.formVenta.reset()
+            }})
           this.obtenerVentas();
           this.formVenta.reset()
         })
       }
     }
+    // this.listaProductos.forEach(element => {
+    //   if (this.formVenta.get('idProducto')?.value == element.idProducto) {
+    //     if (this.formVenta.get('cantidad')?.value > element.cantidad) {
+    //       this.stock = false
+    //       this.toastr.error('No hay suficientes productos', 'Stock Insuficionte');
+    //     } else {
+    //       this.stock = true
+    //       const producto: any ={
+    //         idProducto: element.idProducto,
+    //         nombre: element.nombre,
+    //         precioUnitario: element.precioUnitario,
+    //         cantidad: element.cantidad-this.formVenta.get('cantidad')?.value
+    //       }
+    //       console.log(producto);
+    //       this.productoService.editProduct(element.idProducto,producto).subscribe(data =>{})
+    //       this.obtenerVentas();
+    //       this.formVenta.reset()
+    //     }
+    //   }
+      
+    // });
+    console.log(this.formVenta.get('idCliente')?.value);
   }
 }

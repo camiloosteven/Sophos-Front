@@ -17,73 +17,58 @@
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Nombres</label>
                             <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fa-solid fa-user" [class.correct]="this.formCliente.get('nombres')?.valid" [class.incorrect]="this.formCliente.get('nombres')?.invalid && this.formCliente.get('nombres')?.touched"></i></span>
-                                <input formControlName="nombres" type="text" class="form-control" placeholder="Nombre" aria-label="Nombre"
-                                    aria-describedby="basic-addon1">
+                                <span class="input-group-text"><i class="fa-solid fa-user"
+                                        [class.correct]="this.formCliente.get('nombres')?.valid"
+                                        [class.incorrect]="this.formCliente.get('nombres')?.invalid && this.formCliente.get('nombres')?.touched"></i></span>
+                                <input formControlName="nombres" type="text" class="form-control" placeholder="Nombre"
+                                    aria-label="Nombre" aria-describedby="basic-addon1">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Apellidos</label>
                             <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fa-solid fa-user" [class.correct]="this.formCliente.get('apellidos')?.valid" [class.incorrect]="this.formCliente.get('apellidos')?.invalid && this.formCliente.get('apellidos')?.touched"></i></span>
-                                <input formControlName="apellidos" type="text" class="form-control" placeholder="Apellidos" aria-label="apellidos"
-                                    aria-describedby="basic-addon1">
+                                <span class="input-group-text"><i class="fa-solid fa-user"
+                                        [class.correct]="this.formCliente.get('apellidos')?.valid"
+                                        [class.incorrect]="this.formCliente.get('apellidos')?.invalid && this.formCliente.get('apellidos')?.touched"></i></span>
+                                <input formControlName="apellidos" type="text" class="form-control"
+                                    placeholder="Apellidos" aria-label="apellidos" aria-describedby="basic-addon1">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Telefono</label>
                             <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fa-solid fa-calculator" [class.correct]="this.formCliente.get('telefono')?.valid" [class.incorrect]="this.formCliente.get('telefono')?.invalid && this.formCliente.get('telefono')?.touched"></i></span>
-                                <input formControlName="telefono" type="number" class="form-control" placeholder="Telefono" aria-label="telefono"
-                                    aria-describedby="basic-addon1">
+                                <span class="input-group-text"><i class="fa-solid fa-calculator"
+                                        [class.correct]="this.formCliente.get('telefono')?.valid"
+                                        [class.incorrect]="this.formCliente.get('telefono')?.invalid && this.formCliente.get('telefono')?.touched"></i></span>
+                                <input formControlName="telefono" type="number" class="form-control"
+                                    placeholder="Telefono" aria-label="telefono" aria-describedby="basic-addon1">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Edad</label>
                             <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fa-solid fa-calculator" [class.correct]="this.formCliente.get('edad')?.valid" [class.incorrect]="this.formCliente.get('edad')?.invalid && this.formCliente.get('edad')?.touched"></i></span>
-                                <input formControlName="edad" type="number" class="form-control" placeholder="Edad" aria-label="Edad" maxlength="2"
-                                    aria-describedby="basic-addon1">
+                                <span class="input-group-text"><i class="fa-solid fa-calculator"
+                                        [class.correct]="this.formCliente.get('edad')?.valid"
+                                        [class.incorrect]="this.formCliente.get('edad')?.invalid && this.formCliente.get('edad')?.touched"></i></span>
+                                <input formControlName="edad" type="number" class="form-control" placeholder="Edad"
+                                    aria-label="Edad" maxlength="2" aria-describedby="basic-addon1">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Correo</label>
                             <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fa-solid fa-user" [class.correct]="this.formCliente.get('correo')?.valid" [class.incorrect]="this.formCliente.get('correo')?.invalid && this.formCliente.get('correo')?.touched"></i></span>
-                                <input formControlName="correo" type="text" class="form-control" placeholder="Correo" aria-label="Correo"
-                                    aria-describedby="basic-addon1">
+                                <span class="input-group-text"><i class="fa-solid fa-user"
+                                        [class.correct]="this.formCliente.get('correo')?.valid"
+                                        [class.incorrect]="this.formCliente.get('correo')?.invalid && this.formCliente.get('correo')?.touched"></i></span>
+                                <input formControlName="correo" type="email" class="form-control" placeholder="Correo"
+                                    aria-label="Correo" aria-describedby="basic-addon1">
                             </div>
                         </div>
-                        <!-- <div class="form-group">
-                            <label for="exampleFormControlSelect1">Precio Unitario</label>
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fa-solid fa-apple-whole"></i></span>
-                                <select class="form-control" id="exampleFormControlSelect1">
-                                    <option formControlName="" *ngFor="let product of listProducts">{{product.nombre}}</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleFormControlInput1">Cantidad</label>
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fa-solid fa-calculator"></i></span>
-                                <input type="number" class="form-control" placeholder="Cantidad" aria-label="Cantidad"
-                                    aria-describedby="basic-addon1">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleFormControlInput1">Total</label>
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fa-solid fa-wallet"></i></span>
-                                <input type="number" class="form-control" aria-label="Total"
-                                    aria-describedby="basic-addon1">
-                            </div>
-                        </div>
-                        -->
                         <div class="d-grid gap-2">
-                            <button [disabled]="this.formCliente.invalid" type="submit" class="btn btn-success btn-lg btn-block">ACEPTAR</button>
-                        </div> 
-                    
+                            <button [disabled]="this.formCliente.invalid" type="submit"
+                                class="btn btn-success btn-lg btn-block">ACEPTAR</button>
+                        </div>
+
                     </form>
                 </div>
             </div>
@@ -96,13 +81,15 @@
                         <tbody>
                             <tr>
                                 <th *ngFor="let columna of TableHead" scope="col">{{columna}}</th>
-                              </tr>
+                            </tr>
                             <tr *ngFor="let elem of listaClientes; let i = index">
                                 <td>{{elem.idCliente}}</td>
                                 <td>{{elem.nombres}}</td>
                                 <td>{{elem.telefono}}</td>
-                                <td><i class="fa-solid fa-pen-to-square text-info fontIcons" (click)="editarProducto(elem);selectEdit()"></i></td>
-                                <td><i class="fa-solid fa-trash text-danger fontIcons" (click)="eliminarCliente(elem.idCliente)"></i></td>
+                                <td><i class="fa-solid fa-pen-to-square text-info fontIcons"
+                                        (click)="editarProducto(elem);selectEdit()"></i></td>
+                                <td><i class="fa-solid fa-trash text-danger fontIcons"
+                                        (click)="eliminarCliente(elem.idCliente)"></i></td>
                             </tr>
                         </tbody>
                     </table>

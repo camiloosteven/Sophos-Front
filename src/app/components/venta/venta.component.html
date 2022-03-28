@@ -17,59 +17,44 @@
                         <div class="form-group">
                             <label for="exampleFormControlSelect1">Nombre Cliente</label>
                             <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fa-solid fa-apple-whole"></i></span>
+                                <span class="input-group-text"><i class="fa-solid fa-user"
+                                        [class.correct]="this.formVenta.get('idCliente')?.valid"
+                                        [class.incorrect]="this.formVenta.get('idCliente')?.invalid && this.formVenta.get('idCliente')?.touched"></i></span>
                                 <select formControlName="idCliente" class="form-control" id="exampleFormControlSelect1">
-                                    <option *ngFor="let cliente of listaClientes" [value]="cliente.idCliente" >{{cliente.nombres}}</option>
+                                    <option *ngFor="let cliente of listaClientes" [value]="cliente.idCliente">
+                                        {{cliente.nombres}}</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlSelect2">Nombre Producto</label>
                             <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fa-solid fa-apple-whole"></i></span>
-                                <select formControlName="idProducto" class="form-control" id="exampleFormControlSelect2">
-                                    <option *ngFor="let producto of listaProductos" [value]="producto.idProducto">{{producto.nombre}}</option>
+                                <span class="input-group-text"><i class="fa-solid fa-book-atlas"
+                                        [class.correct]="this.formVenta.get('idProducto')?.valid"
+                                        [class.incorrect]="this.formVenta.get('idProducto')?.invalid && this.formVenta.get('idProducto')?.touched"></i></span>
+                                <select formControlName="idProducto" class="form-control"
+                                    id="exampleFormControlSelect2">
+                                    <option *ngFor="let producto of listaProductos" [value]="producto.idProducto">
+                                        {{producto.nombre}}</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Cantidad</label>
                             <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fa-solid fa-calculator" [class.correct]="this.formVenta.get('cantidad')?.valid" [class.incorrect]="this.formVenta.get('cantidad')?.invalid && this.formVenta.get('cantidad')?.touched"></i></span>
-                                <input formControlName="cantidad" type="number" class="form-control" placeholder="cantidad" aria-label="cantidad"
-                                    aria-describedby="basic-addon1">
+                                <span class="input-group-text"><i class="fa-solid fa-calculator"
+                                        [class.correct]="this.formVenta.get('cantidad')?.valid"
+                                        [class.incorrect]="this.formVenta.get('cantidad')?.invalid && this.formVenta.get('cantidad')?.touched"></i></span>
+                                <input formControlName="cantidad" type="number" class="form-control"
+                                    placeholder="cantidad" aria-label="cantidad" aria-describedby="basic-addon1">
                             </div>
                         </div>
-                        <!-- <div class="form-group">
-                            <label for="exampleFormControlSelect1">Precio Unitario</label>
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fa-solid fa-apple-whole"></i></span>
-                                <select class="form-control" id="exampleFormControlSelect1">
-                                    <option formControlName="" *ngFor="let product of listProducts">{{product.nombre}}</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleFormControlInput1">Cantidad</label>
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fa-solid fa-calculator"></i></span>
-                                <input type="number" class="form-control" placeholder="Cantidad" aria-label="Cantidad"
-                                    aria-describedby="basic-addon1">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleFormControlInput1">Total</label>
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fa-solid fa-wallet"></i></span>
-                                <input type="number" class="form-control" aria-label="Total"
-                                    aria-describedby="basic-addon1">
-                            </div>
-                        </div>
-                        -->
                         <div class="d-grid gap-2">
-                            <button [disabled]="this.formVenta.invalid && !stock" type="submit" class="btn btn-success btn-lg btn-block">ACEPTAR</button>
-                        </div> 
-                    
+                            <button [disabled]="this.formVenta.invalid" type="submit"
+                                class="btn btn-success btn-lg btn-block"><i class="fa-solid fa-cart-shopping"></i>
+                                ACEPTAR</button>
+                        </div>
+
                     </form>
                 </div>
             </div>
@@ -82,7 +67,7 @@
                         <tbody>
                             <tr>
                                 <th *ngFor="let columna of TableHead" scope="col">{{columna}}</th>
-                              </tr>
+                            </tr>
                             <tr *ngFor="let element of listaVentas; let i = index">
                                 <td>{{element.idCliente}}</td>
                                 <td>{{element.idProducto}}</td>
