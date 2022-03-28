@@ -13,28 +13,44 @@
             <div class="card">
                 <div class="card-body">
                     <h3 class="title">{{ !typeEdit ? 'Agregar Cliente' : 'Editar Cliente' }}</h3>
-                    <form [formGroup]="formCliente" (ngSubmit)="agregarProducto()">
+                    <form [formGroup]="formCliente" (ngSubmit)="agregarCliente()">
                         <div class="form-group">
-                            <label for="exampleFormControlInput1">Nombre</label>
+                            <label for="exampleFormControlInput1">Nombres</label>
                             <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fa-solid fa-user" [class.correct]="this.formCliente.get('nombre')?.valid" [class.incorrect]="this.formCliente.get('nombre')?.invalid && this.formCliente.get('nombre')?.touched"></i></span>
-                                <input formControlName="nombre" type="text" class="form-control" placeholder="Nombre" aria-label="Nombre"
+                                <span class="input-group-text"><i class="fa-solid fa-user" [class.correct]="this.formCliente.get('nombres')?.valid" [class.incorrect]="this.formCliente.get('nombres')?.invalid && this.formCliente.get('nombres')?.touched"></i></span>
+                                <input formControlName="nombres" type="text" class="form-control" placeholder="Nombre" aria-label="Nombre"
                                     aria-describedby="basic-addon1">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="exampleFormControlInput1">Cantidad</label>
+                            <label for="exampleFormControlInput1">Apellidos</label>
                             <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fa-solid fa-calculator" [class.correct]="this.formCliente.get('cantidad')?.valid" [class.incorrect]="this.formCliente.get('cantidad')?.invalid && this.formCliente.get('cantidad')?.touched"></i></span>
-                                <input formControlName="cantidad" type="text" class="form-control" placeholder="cantidad" aria-label="cantidad"
+                                <span class="input-group-text"><i class="fa-solid fa-user" [class.correct]="this.formCliente.get('apellidos')?.valid" [class.incorrect]="this.formCliente.get('apellidos')?.invalid && this.formCliente.get('apellidos')?.touched"></i></span>
+                                <input formControlName="apellidos" type="text" class="form-control" placeholder="Apellidos" aria-label="apellidos"
                                     aria-describedby="basic-addon1">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="exampleFormControlInput1">Precio Unitario</label>
+                            <label for="exampleFormControlInput1">Telefono</label>
                             <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fa-solid fa-calculator" [class.correct]="this.formCliente.get('precioUnitario')?.valid" [class.incorrect]="this.formCliente.get('precioUnitario')?.invalid && this.formCliente.get('precioUnitario')?.touched"></i></span>
-                                <input formControlName="precioUnitario" type="text" class="form-control" placeholder="Precio" aria-label="Precio" maxlength="5"
+                                <span class="input-group-text"><i class="fa-solid fa-calculator" [class.correct]="this.formCliente.get('telefono')?.valid" [class.incorrect]="this.formCliente.get('telefono')?.invalid && this.formCliente.get('telefono')?.touched"></i></span>
+                                <input formControlName="telefono" type="number" class="form-control" placeholder="Telefono" aria-label="telefono"
+                                    aria-describedby="basic-addon1">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1">Edad</label>
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa-solid fa-calculator" [class.correct]="this.formCliente.get('edad')?.valid" [class.incorrect]="this.formCliente.get('edad')?.invalid && this.formCliente.get('edad')?.touched"></i></span>
+                                <input formControlName="edad" type="number" class="form-control" placeholder="Edad" aria-label="Edad" maxlength="2"
+                                    aria-describedby="basic-addon1">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1">Correo</label>
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa-solid fa-user" [class.correct]="this.formCliente.get('correo')?.valid" [class.incorrect]="this.formCliente.get('correo')?.invalid && this.formCliente.get('correo')?.touched"></i></span>
+                                <input formControlName="correo" type="text" class="form-control" placeholder="Correo" aria-label="Correo"
                                     aria-describedby="basic-addon1">
                             </div>
                         </div>
@@ -86,7 +102,7 @@
                                 <td>{{elem.nombres}}</td>
                                 <td>{{elem.telefono}}</td>
                                 <td><i class="fa-solid fa-pen-to-square text-info fontIcons" (click)="editarProducto(elem);selectEdit()"></i></td>
-                                <td><i class="fa-solid fa-trash text-danger fontIcons" (click)="eliminarPorducto(elem.idProducto)"></i></td>
+                                <td><i class="fa-solid fa-trash text-danger fontIcons" (click)="eliminarCliente(elem.idCliente)"></i></td>
                             </tr>
                         </tbody>
                     </table>

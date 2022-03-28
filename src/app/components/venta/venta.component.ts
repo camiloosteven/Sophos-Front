@@ -10,7 +10,7 @@ import { ProductoService } from 'src/app/services/producto.service';
   styleUrls: ['./venta.component.css']
 })
 export class VentaComponent implements OnInit {
-  TableHead: any[] = ["Cliente", "Producto", "Cantidad"]
+  TableHead: any[] = ["Cliente", "Producto", "Cantidad", "Total"]
   listaVentas: any[] = [];
   listaProductos: any[] = [];
   listaClientes: any[] = [];
@@ -18,47 +18,37 @@ export class VentaComponent implements OnInit {
   valorTotal: number = 0;
   listaProductosNombre: any[] = [];
   typeEdit: boolean = false;
+  stock: boolean = true;
   formVenta: FormGroup;
   id: number | undefined;
   constructor(private formB: FormBuilder, private toastr: ToastrService, private ventasService: VentaService, private clienteService: ClienteService, private productoService: ProductoService) {
     this.formVenta = this.formB.group({
-      idCliente: [''],
-      idProducto: [''],
-      cantidad: [''],
+      idCliente: ['', Validators.required],
+      idProducto: ['', Validators.required],
+      cantidad: ['', Validators.required],
       total: ['']
     })
   }
 
   ngOnInit(): void {
     this.obtenerVentas();
-    this.obtenerPrecios();
+    this.obtenerClientes();
   }
 
-  obtenerPrecios() {
-    this.productoService.getListProducts().subscribe(data => {
-      for (let index = 0; index < data.length; index++) {
-        const element = data[index].precioUnitario;
-        console.log(element);
-      }
+  obtenerClientes() {
+    this.clienteService.getListaClientes().subscribe(data => {
+      this.listaClientes = data;
     })
   }
   obtenerProductos() {
     this.productoService.getListProducts().subscribe(data => {
       this.listaProductos = data;
-      console.log(data);
-      this.listaProductos.forEach((element, index) => {
-        if (data[index].idProducto === 5) {
-          console.log("El producto" + element.nombre);
-
-        }
-      });
     })
   }
 
   obtenerVentas() {
     this.clienteService.getListaClientes().subscribe(data => {
       this.listaClientes = data;
-      console.log(data);
     })
     this.ventasService.getListaVentas().subscribe(data1 => {
       this.listaVentas = data1;
@@ -67,20 +57,14 @@ export class VentaComponent implements OnInit {
         this.listaVentas.forEach((element1, index2) => {
           this.listaProductos.forEach((element2, index) => {
             if (element1.idProducto == element2.idProducto) {
-              console.log("Entro al if", element2.nombre);
               this.listaVentas[index2].idProducto = element2.nombre
-            } else {
-              console.log("No entro al if");
             }
           });
         });
         this.listaVentas.forEach((element1, index2) => {
           this.listaClientes.forEach((element2, index) => {
             if (element1.idCliente == element2.idCliente) {
-              console.log("Entro al if", element2.nombre);
               this.listaVentas[index2].idCliente = element2.nombres
-            } else {
-              console.log("No entro al if");
             }
           });
         });
@@ -89,15 +73,31 @@ export class VentaComponent implements OnInit {
     })
   }
 
-  agregarProducto() {
+  agregarVenta() {
     this.productoService.getListProducts().subscribe(data2 => {
-    this.listaProductos = data2;})
+      this.listaProductos = data2;
+    })
     this.listaProductos.forEach(element => {
       if (this.formVenta.get('idProducto')?.value == element.idProducto) {
-        console.log("Entra al ifff");
-        this.valorTotal =  this.formVenta.get('cantidad')?.value * element.precioUnitario
-        console.log(this.valorTotal);
+        this.valorTotal = this.formVenta.get('cantidad')?.value * element.precioUnitario
+        if (this.formVenta.get('cantidad')?.value > element.cantidad) {
+          this.stock = false
+          this.toastr.error('No hay suficientes productos', 'Stock Insuficionte');
+        } else {
+          this.stock = true
+          const producto: any ={
+            idProducto: element.idProducto,
+            nombre: element.nombre,
+            precioUnitario: element.precioUnitario,
+            cantidad: element.cantidad-this.formVenta.get('cantidad')?.value
+          }
+          console.log(producto);
+          this.productoService.editProduct(element.idProducto,producto).subscribe(data =>{})
+          this.obtenerVentas();
+          this.formVenta.reset()
+        }
       }
+      
     });
     const venta: any = {
       idCliente: this.formVenta.get('idCliente')?.value,
@@ -105,43 +105,20 @@ export class VentaComponent implements OnInit {
       cantidad: this.formVenta.get('cantidad')?.value,
       total: this.valorTotal
     }
-    
+
     if (this.id == undefined) {
-      console.log(venta);
-      this.ventasService.agregarVenta(venta).subscribe(data => {
-        this.toastr.success('Tu producto se ha creado correctamente', 'Producto ingresado');
-        this.obtenerVentas();
-        this.formVenta.reset()
-      })
-    } else {
-      venta.idVenta = this.id
-      this.ventasService.editarVenta(this.id, venta).subscribe(data => {
-        this.formVenta.reset()
-        this.id = undefined
-        this.toastr.success('Tu producto se ha actualizado correctamente', 'Producto Actualizado');
-        this.obtenerVentas()
-      })
+      if (this.stock) {
+        this.ventasService.agregarVenta(venta).subscribe(data => {
+          this.toastr.success('La venta se ha registrado correctamente', 'Venta registrada');
+        //   producto.idProducto = this.id
+        // this.productService.editProduct(this.id,producto).subscribe(data =>{
+        // this.form.reset()
+        // this.id = undefined
+        // this.toastr.success('Tu producto se ha actualizado correctamente', 'Producto Actualizado');
+          this.obtenerVentas();
+          this.formVenta.reset()
+        })
+      }
     }
-  }
-
-  eliminarVenta(idVenta: number) {
-    this.ventasService.eliminarVentas(idVenta).subscribe(data => {
-      this.toastr.error('Tu producto se ha eliminado', 'Producto eliminado');
-      this.obtenerVentas();
-    })
-  }
-  selectEdit() {
-    this.typeEdit = true
-  }
-
-  editarVenta(venta: any) {
-    this.typeEdit = true
-    this.id = venta.idVenta;
-    this.formVenta.patchValue({
-      idCliente: venta.idCliente,
-      idProducto: venta.idProducto,
-      cantidad: venta.cantidad,
-      total: this.formVenta.get('cantidad')?.value * 2
-    })
   }
 }

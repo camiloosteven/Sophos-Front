@@ -13,22 +13,22 @@
             <div class="card">
                 <div class="card-body">
                     <h3 class="title">{{ !typeEdit ? 'Agregar Venta' : 'Editar Venta' }}</h3>
-                    <form [formGroup]="formVenta" (ngSubmit)="agregarProducto()">
+                    <form [formGroup]="formVenta" (ngSubmit)="agregarVenta()">
                         <div class="form-group">
                             <label for="exampleFormControlSelect1">Nombre Cliente</label>
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fa-solid fa-apple-whole"></i></span>
                                 <select formControlName="idCliente" class="form-control" id="exampleFormControlSelect1">
-                                    <option *ngFor="let cliente of listaClientes" [value]="cliente.idCliente" aria-placeholder="selecciona">{{cliente.nombres}}</option>
+                                    <option *ngFor="let cliente of listaClientes" [value]="cliente.idCliente" >{{cliente.nombres}}</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="exampleFormControlSelect1">Nombre Producto</label>
+                            <label for="exampleFormControlSelect2">Nombre Producto</label>
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fa-solid fa-apple-whole"></i></span>
-                                <select formControlName="idProducto" class="form-control" id="exampleFormControlSelect1">
-                                    <option *ngFor="let producto of listaProductos" [value]="producto.idProducto" aria-placeholder="selecciona">{{producto.nombre}}</option>
+                                <select formControlName="idProducto" class="form-control" id="exampleFormControlSelect2">
+                                    <option *ngFor="let producto of listaProductos" [value]="producto.idProducto">{{producto.nombre}}</option>
                                 </select>
                             </div>
                         </div>
@@ -36,7 +36,7 @@
                             <label for="exampleFormControlInput1">Cantidad</label>
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fa-solid fa-calculator" [class.correct]="this.formVenta.get('cantidad')?.valid" [class.incorrect]="this.formVenta.get('cantidad')?.invalid && this.formVenta.get('cantidad')?.touched"></i></span>
-                                <input formControlName="cantidad" type="text" class="form-control" placeholder="cantidad" aria-label="cantidad"
+                                <input formControlName="cantidad" type="number" class="form-control" placeholder="cantidad" aria-label="cantidad"
                                     aria-describedby="basic-addon1">
                             </div>
                         </div>
@@ -67,7 +67,7 @@
                         </div>
                         -->
                         <div class="d-grid gap-2">
-                            <button [disabled]="this.formVenta.invalid" type="submit" class="btn btn-success btn-lg btn-block">ACEPTAR</button>
+                            <button [disabled]="this.formVenta.invalid && !stock" type="submit" class="btn btn-success btn-lg btn-block">ACEPTAR</button>
                         </div> 
                     
                     </form>
@@ -83,12 +83,11 @@
                             <tr>
                                 <th *ngFor="let columna of TableHead" scope="col">{{columna}}</th>
                               </tr>
-                            <tr *ngFor="let elem of listaVentas; let i = index">
-                                <td>{{elem.idCliente}}</td>
-                                <td>{{elem.idProducto}}</td>
-                                <td>{{elem.cantidad}}</td>
-                                <td><i class="fa-solid fa-pen-to-square text-info fontIcons" (click)="editarVenta(elem);selectEdit()"></i></td>
-                                <td><i class="fa-solid fa-trash text-danger fontIcons" (click)="eliminarVenta(elem.idVenta)"></i></td>
+                            <tr *ngFor="let element of listaVentas; let i = index">
+                                <td>{{element.idCliente}}</td>
+                                <td>{{element.idProducto}}</td>
+                                <td>{{element.cantidad}}</td>
+                                <td>{{element.total}}</td>
                             </tr>
                         </tbody>
                     </table>

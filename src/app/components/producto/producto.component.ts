@@ -50,6 +50,7 @@ export class ProductoComponent implements OnInit {
         this.id = undefined
         this.toastr.success('Tu producto se ha actualizado correctamente', 'Producto Actualizado');
         this.obtenerProductos()
+        this.typeEdit = false
       })
     }
   }

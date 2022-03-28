@@ -17,9 +17,11 @@ export class ClienteComponent implements OnInit {
   id: number | undefined;
   constructor(private formB: FormBuilder,private toastr: ToastrService, private clienteService: ClienteService) {
     this.formCliente = this.formB.group({
-      nombre: ['',Validators.required],
-      precioUnitario: ['',Validators.required],
-      cantidad: ['',Validators.required]
+      nombres: ['',Validators.required],
+      apellidos: ['',Validators.required],
+      telefono: ['',Validators.required],
+      edad: ['',Validators.required],
+      correo: ['',Validators.required],
     })
    }
 
@@ -32,17 +34,17 @@ export class ClienteComponent implements OnInit {
       console.log(data);
     })
   }
-  agregarProducto(){
+  agregarCliente(){
     const cliente: any ={
-      nombres: this.formCliente.get('nombre')?.value,
-      apellidos: this.formCliente.get('precioUnitario')?.value,
-      telefono: this.formCliente.get('cantidad')?.value,
+      nombres: this.formCliente.get('nombres')?.value,
+      apellidos: this.formCliente.get('apellidos')?.value,
+      telefono: this.formCliente.get('telefono')?.value,
       edad: this.formCliente.get('edad')?.value,
       corrreo: this.formCliente.get('correo')?.value,
     }
     if (this.id == undefined) {
         this.clienteService.agregarCliente(cliente).subscribe(data =>{
-        this.toastr.success('Tu producto se ha creado correctamente', 'Producto ingresado');
+        this.toastr.success('El cliente se ha creado correctamente', 'Cliente ingresado');
         this.obtenerCliente();
         this.formCliente.reset()    
       })    
@@ -51,13 +53,13 @@ export class ClienteComponent implements OnInit {
         this.clienteService.editarCliente(this.id,cliente).subscribe(data =>{
         this.formCliente.reset()
         this.id = undefined
-        this.toastr.success('Tu producto se ha actualizado correctamente', 'Producto Actualizado');
+        this.toastr.success('Los datos del cliente se han actualizado correctamente', 'Cliente Actualizado');
         this.obtenerCliente()
       })
     }
   }
   
-  eliminarPorducto(idCliente: number){
+  eliminarCliente(idCliente: number){
     this.clienteService.eliminarCliente(idCliente).subscribe(data =>{
     this.toastr.error('Tu producto se ha eliminado', 'Producto eliminado');
     this.obtenerCliente();
