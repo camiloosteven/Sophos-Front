@@ -1,0 +1,28 @@
+***Crear BD***
+CREATE DATABASE SophosDB
+use SophosDB
+
+***Crear Tablas***
+CREATE TABLE Cliente(idCliente int identity primary key, nombres varchar(40),apellidos varchar(40),identificacion int, telefono int, edad int);
+CREATE TABLE Producto(idProducto int identity primary key, nombre varchar(40), precioUnitario int,cantidad int);
+CREATE TABLE Venta(idVenta int identity primary key, idCliente int foreign key (idCliente) references Cliente(idCliente),idProducto int foreign key (idProducto) references Producto(idProducto), cantidad int, total int, fechaVenta date);
+CREATE TABLE DetalleVenta(idDetalle int identity primary key, idVenta int foreign key (idVenta) references Venta(idVenta), idProducto int foreign key (idProducto) references Producto(idProducto),cantidad int);
+
+***Datos Prueba***
+INSERT INTO Cliente(nombres, apellidos, telefono, edad) values ('Juan','Gomez',43234232 ,21)
+INSERT INTO Cliente(nombres, apellidos, telefono, edad) values ('Pedro','Sierra',431223 ,34)
+INSERT INTO Cliente(nombres, apellidos, telefono, edad) values ('Miguel','Arias',31232321, 23)
+INSERT INTO Cliente(nombres, apellidos, telefono, edad) values ('Andres','Arias',312321321 ,22)
+
+INSERT INTO Producto(nombre,precioUnitario,cantidad) values ('Manzana',900,120)
+INSERT INTO Producto(nombre,precioUnitario,cantidad) values ('Naranja',700,100)
+INSERT INTO Producto(nombre,precioUnitario,cantidad) values ('Pera',800,80)
+INSERT INTO Producto(nombre,precioUnitario,cantidad) values ('Durazno',400,220)
+INSERT INTO Producto(nombre,precioUnitario,cantidad) values ('Melon',1700,10)
+
+INSERT INTO Venta(idCliente,idProducto,total,cantidad,fechaVenta) values (1,1,20000,18,'2000-07-01')
+INSERT INTO Venta(idCliente,idProducto,total,cantidad,fechaVenta) values (4,2,25000,23,'2005-11-11')
+INSERT INTO Venta(idCliente,idProducto,total,cantidad,fechaVenta) values (2,5,2000,2,'2022-02-03')
+INSERT INTO Venta(idCliente,idProducto,total,cantidad,fechaVenta) values (3,1,17000,17,'2000-03-11')
+INSERT INTO Venta(idCliente,idProducto,total,cantidad,fechaVenta) values (2,2,12000,10,'2000-04-08')
+
