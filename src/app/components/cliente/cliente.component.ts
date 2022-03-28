@@ -20,8 +20,7 @@ export class ClienteComponent implements OnInit {
       nombres: ['',Validators.required],
       apellidos: ['',Validators.required],
       telefono: ['',Validators.required],
-      edad: ['',Validators.required],
-      correo: ['',Validators.required],
+      edad: ['',Validators.required]
     })
    }
 
@@ -31,7 +30,6 @@ export class ClienteComponent implements OnInit {
   obtenerCliente(){
     this.clienteService.getListaClientes().subscribe(data=>{
       this.listaClientes = data;
-      console.log(data);
     })
   }
   agregarCliente(){
@@ -39,10 +37,8 @@ export class ClienteComponent implements OnInit {
       nombres: this.formCliente.get('nombres')?.value,
       apellidos: this.formCliente.get('apellidos')?.value,
       telefono: this.formCliente.get('telefono')?.value,
-      edad: this.formCliente.get('edad')?.value,
-      corrreo: this.formCliente.get('correo')?.value,
+      edad: this.formCliente.get('edad')?.value
     }
-    console.log(cliente);
     
     if (this.id == undefined) {
         this.clienteService.agregarCliente(cliente).subscribe(data =>{
@@ -79,7 +75,6 @@ export class ClienteComponent implements OnInit {
       apellidos: cliente.apellidos,
       telefono: cliente.telefono,
       edad: cliente.edad,
-      correo: cliente.correo
     })
 
   }

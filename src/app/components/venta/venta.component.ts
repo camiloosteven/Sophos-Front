@@ -77,6 +77,7 @@ export class VentaComponent implements OnInit {
     this.productoService.getListProducts().subscribe(data2 => {
       this.listaProductos = data2;
     })
+    // foreach para obtener el precio unitario del producto y calcular el total
     this.listaProductos.forEach(element => {
       if (this.formVenta.get('idProducto')?.value == element.idProducto) {
         this.valorTotal = this.formVenta.get('cantidad')?.value * element.precioUnitario
@@ -93,12 +94,11 @@ export class VentaComponent implements OnInit {
       cantidad: this.formVenta.get('cantidad')?.value,
       total: this.valorTotal
     }
-    console.log(venta);
-    
     if (this.id == undefined) {
       if (this.stock) {
         this.ventasService.agregarVenta(venta).subscribe(data => {
           this.toastr.success('La venta se ha registrado correctamente', 'Venta registrada');
+          // foreach para comparar y restar la cantidad de producto del stock
           this.listaProductos.forEach(element => {
             if (this.formVenta.get('idProducto')?.value == element.idProducto) {
               const producto: any ={
@@ -107,7 +107,6 @@ export class VentaComponent implements OnInit {
                         precioUnitario: element.precioUnitario,
                         cantidad: element.cantidad-this.formVenta.get('cantidad')?.value
                       }
-                      console.log(producto);
                       this.productoService.editProduct(element.idProducto,producto).subscribe(data =>{})
                       this.obtenerVentas();
                       this.formVenta.reset()
@@ -117,27 +116,5 @@ export class VentaComponent implements OnInit {
         })
       }
     }
-    // this.listaProductos.forEach(element => {
-    //   if (this.formVenta.get('idProducto')?.value == element.idProducto) {
-    //     if (this.formVenta.get('cantidad')?.value > element.cantidad) {
-    //       this.stock = false
-    //       this.toastr.error('No hay suficientes productos', 'Stock Insuficionte');
-    //     } else {
-    //       this.stock = true
-    //       const producto: any ={
-    //         idProducto: element.idProducto,
-    //         nombre: element.nombre,
-    //         precioUnitario: element.precioUnitario,
-    //         cantidad: element.cantidad-this.formVenta.get('cantidad')?.value
-    //       }
-    //       console.log(producto);
-    //       this.productoService.editProduct(element.idProducto,producto).subscribe(data =>{})
-    //       this.obtenerVentas();
-    //       this.formVenta.reset()
-    //     }
-    //   }
-      
-    // });
-    console.log(this.formVenta.get('idCliente')?.value);
   }
 }
