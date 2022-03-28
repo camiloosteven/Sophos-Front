@@ -185,6 +185,9 @@ h1, .h1 {
 .dashboard-nav a {
     color: #fff;
 }
+.estilosImagen{
+    width: 120px;
+}
 
 .brand-logo {
     font-family: "Nunito", sans-serif;

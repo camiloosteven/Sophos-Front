@@ -38,6 +38,16 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label for="exampleFormControlInput1">Identificacion</label>
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa-solid fa-calculator"
+                                        [class.correct]="this.formCliente.get('identificacion')?.valid"
+                                        [class.incorrect]="this.formCliente.get('identificacion')?.invalid && this.formCliente.get('identificacion')?.touched"></i></span>
+                                <input formControlName="identificacion" type="number" class="form-control"
+                                    placeholder="Numero de identificacion" aria-label="telefono" aria-describedby="basic-addon1">
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label for="exampleFormControlInput1">Telefono</label>
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fa-solid fa-calculator"

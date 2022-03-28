@@ -19,6 +19,7 @@ export class ClienteComponent implements OnInit {
     this.formCliente = this.formB.group({
       nombres: ['',Validators.required],
       apellidos: ['',Validators.required],
+      identificacion: ['',Validators.required],
       telefono: ['',Validators.required],
       edad: ['',Validators.required]
     })
@@ -36,6 +37,7 @@ export class ClienteComponent implements OnInit {
     const cliente: any ={
       nombres: this.formCliente.get('nombres')?.value,
       apellidos: this.formCliente.get('apellidos')?.value,
+      identificacion: this.formCliente.get('identificacion')?.value,
       telefono: this.formCliente.get('telefono')?.value,
       edad: this.formCliente.get('edad')?.value
     }
@@ -73,6 +75,7 @@ export class ClienteComponent implements OnInit {
     this.formCliente.patchValue({
       nombres: cliente.nombres,
       apellidos: cliente.apellidos,
+      identificacion: cliente.identificacion,
       telefono: cliente.telefono,
       edad: cliente.edad,
     })
